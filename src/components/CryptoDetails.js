@@ -135,7 +135,7 @@ const CryptoDetails = () => {
                                         style: 'currency',
                                         currency: currency,
                                         notation: 'compact',
-                                        // maximumSignificantDigits: 5,
+                                        HighLowIndicator// maximumSignificantDigits: 5,
                                     }).format(data.market_data.fully_diluted_valuation[currency])}
                             </h2>
                         </div>
