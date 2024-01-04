@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CryptoContext } from '../context/CryptoContext';
 import { useState } from 'react';
-  
+import Chart from '../components/Chart';
 
 
 const HighLowIndicator = ({ currentPrice, high, low }) => {
@@ -61,7 +61,7 @@ const CryptoDetails = () => {
         {/* if data is unavailable will show nothing */}
 
         {      
-            data ? 
+            data ? ( 
             
             // left side of the popup box
             <div className='w-full h-full p-4 flex items-center justify-center '>
@@ -315,10 +315,8 @@ const CryptoDetails = () => {
 
                 {/* start of the right pop up box */}
 
-                <div className='flex flex-col w-[55%] h-full pl-3 bg-green'>
-                    
-
-                    right
+                <div className='flex flex-col w-[55%] h-full pl-3'>
+                    <Chart id={data.id}/>
 
                 </div>
 
@@ -326,15 +324,15 @@ const CryptoDetails = () => {
             </div>
             
             
-            : null
+             ) : null
         }
 
         </div>
 
 
-        </div>,
+    </div>,
     document.getElementById('model')
-  )
-}
+  );
+};
 
 export default CryptoDetails
