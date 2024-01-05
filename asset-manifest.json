@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/FATA2.0/static/css/main.52ba1b13.css",
-    "main.js": "/FATA2.0/static/js/main.61281619.js",
+    "main.css": "/FATA2.0/static/css/main.0592f59c.css",
+    "main.js": "/FATA2.0/static/js/main.6a316182.js",
     "static/js/787.292a2857.chunk.js": "/FATA2.0/static/js/787.292a2857.chunk.js",
     "static/media/logo.svg": "/FATA2.0/static/media/logo.ba5e309abadff23fef354ee4ab537626.svg",
     "static/media/submit-icon.svg": "/FATA2.0/static/media/submit-icon.df6311ef7bd1383b2860a218cc7d01a4.svg",
@@ -10,12 +10,12 @@
     "index.html": "/FATA2.0/index.html",
     "static/media/search-icon.svg": "/FATA2.0/static/media/search-icon.523d9a8cb9ecb1aa8d160bd7e4e815a6.svg",
     "static/media/index.cjs": "/FATA2.0/static/media/index.cd351d7c31d0d3fccf96.cjs",
-    "main.52ba1b13.css.map": "/FATA2.0/static/css/main.52ba1b13.css.map",
-    "main.61281619.js.map": "/FATA2.0/static/js/main.61281619.js.map",
+    "main.0592f59c.css.map": "/FATA2.0/static/css/main.0592f59c.css.map",
+    "main.6a316182.js.map": "/FATA2.0/static/js/main.6a316182.js.map",
     "787.292a2857.chunk.js.map": "/FATA2.0/static/js/787.292a2857.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.52ba1b13.css",
-    "static/js/main.61281619.js"
+    "static/css/main.0592f59c.css",
+    "static/js/main.6a316182.js"
   ]
 }
