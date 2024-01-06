@@ -1,6 +1,5 @@
 # React Website Tutorial: ⭐Build Feature Rich Crypto Screener App with Tailwind CSS
 
-![GitHub forks](https://img.shields.io/github/forks/codebucks27/CryptoBucks-A-crypto-screener-application?style=social&logo=KashFlow&maxAge=3600)&nbsp;&nbsp;
 
 
 This repository contains final code for Crypto Screener Application in ReactJS by CodeBucks27. <br />
