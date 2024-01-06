@@ -63,7 +63,7 @@ const CryptoDetails = () => {
               <div className="flex w-full items-center">
                 <img
                   className="w-[3rem] h-[3rem] mx-1.5"
-                  src={data.image}
+                  src={data.image.large}
                   alt={data.id}
                 />
                 <h1 className="text-xl capitalize font-medium">{data.name}</h1>
@@ -119,7 +119,7 @@ const CryptoDetails = () => {
                     </div>
                   </div>
                   <h2 className="text-lg font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       maximumSignificantDigits: 5,
@@ -134,7 +134,7 @@ const CryptoDetails = () => {
                     Market Cap
                   </span>
                   <h2 className="text-base font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       minimumFractionDigits: 0,
@@ -146,7 +146,7 @@ const CryptoDetails = () => {
                     fully diluted valuation
                   </span>
                   <h2 className="text-base font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       notation: "compact",
@@ -162,7 +162,7 @@ const CryptoDetails = () => {
                   total volume
                 </span>
                 <h2 className="text-base font-bold">
-                  {new Intl.NumberFormat("en-IN", {
+                  {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: currency,
                     minimumFractionDigits: 0,
@@ -184,7 +184,7 @@ const CryptoDetails = () => {
                     Low 24H
                   </span>
                   <h2 className="text-base font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       minimumFractionDigits: 5,
@@ -196,7 +196,7 @@ const CryptoDetails = () => {
                     high 24H
                   </span>
                   <h2 className="text-base font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       minimumFractionDigits: 5,
@@ -211,7 +211,7 @@ const CryptoDetails = () => {
                     max supply
                   </span>
                   <h2 className="text-base font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       minimumFractionDigits: 0,
@@ -223,7 +223,7 @@ const CryptoDetails = () => {
                     circulating supply
                   </span>
                   <h2 className="text-base font-bold">
-                    {new Intl.NumberFormat("en-IN", {
+                    {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: currency,
                       minimumFractionDigits: 0,
@@ -334,20 +334,6 @@ const CryptoDetails = () => {
                   </span>{" "}
                   {data.market_cap_rank}{" "}
                 </h3>
-
-                <h3 className="text-white py-1">
-                  <span className="text-gray-100 capitalize mr-1">
-                    coinGecko rank:{" "}
-                  </span>{" "}
-                  {data.coingecko_rank}{" "}
-                </h3>
-
-                <h3 className="text-white py-1">
-                  <span className="text-gray-100 capitalize mr-1">
-                    coinGecko score:{" "}
-                  </span>{" "}
-                  {data.coingecko_score}{" "}
-                </h3>
               </div>
             </div>
 
@@ -437,7 +423,35 @@ const CryptoDetails = () => {
                   </svg>
                 </a>
               )}
-
+              {data.links.facebook_username && (
+                <a
+                  className="text-lg px-1"
+                  target={"_blank"}
+                  rel="noreferrer"
+                  href={`https://facebook.com/${data.links.facebook_username}`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                    style={{
+                      msTransform: "rotate(360deg)",
+                      WebkitTransform: "rotate(360deg)",
+                      transform: "rotate(360deg)",
+                    }}
+                  >
+                    <path
+                      fill="currentColor"
+                      className="fill-cyan"
+                      fillRule="evenodd"
+                      d="M0 12.067C0 18.033 4.333 22.994 10 24v-8.667H7V12h3V9.333c0-3 1.933-4.666 4.667-4.666.866 0 1.8.133 2.666.266V8H15.8c-1.467 0-1.8.733-1.8 1.667V12h3.2l-.533 3.333H14V24c5.667-1.006 10-5.966 10-11.933C24 5.43 18.6 0 12 0S0 5.43 0 12.067Z"
+                      clipRule="evenodd"
+                    />
+                    <path fill="rgba(0, 0, 0, 0)" d="M0 0h24v24H0z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         ) : (

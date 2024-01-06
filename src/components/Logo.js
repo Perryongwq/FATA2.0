@@ -1,15 +1,20 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import logoSvg from "../assets/logo.svg";
 
 const Logo = () => {
-    return (
-        <Link to='/' className="absolute top-[1.5rem] left-[1.5rem] [text-decoration:none] text-lg text-cyan flex items-center">
+  return (
+    <Link
+      to="/"
+      className="
+     absolute top-[1.5rem] left-[1.5rem] [text-decoration:none]
+text-lg text-cyan flex items-center
+     "
+    >
+      <img src={logoSvg} alt="Crypto_Tracker" />
+      <span>Crypto_Tracker</span>
+    </Link>
+  );
+};
 
-            <img src={logoSvg} alt="Crypto-FATA" />
-            <span>Crypto-FATA</span>
-        </Link>
-    );
-};   
-
-export default Logo
+export default Logo;

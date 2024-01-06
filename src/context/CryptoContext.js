@@ -13,61 +13,52 @@ export const CryptoProvider = ({ children }) => {
   const [coinSearch, setCoinSearch] = useState("");
 
   const [currency, setCurrency] = useState("usd");
-
   const [sortBy, setSortBy] = useState("market_cap_desc");
-  
   const [page, setPage] = useState(1);
-
   const [totalPages, setTotalPages] = useState(250);
   const [perPage, setPerPage] = useState(10);
 
 
-  // This is how you can do error handling by creating one state to store the error,
 
   const [error, setError] = useState({ data: "", coinData: "", search: "" });
-// there can be 3 errors that we can catch from all three functions, also send the error state 
-// through value prop
 
-  const getCryptoData = async () => {
-    //here we will set an empty string for the data error
-    setError({ ...error, data: "" });
-    setCryptoData();
-    setTotalPages(13220);
-    // try {
-    //   const data = await fetch(
-    //     `https://api.coingecko.com/api/v3/coins/list`
-    //   )
-    //     .then((res) => res.json())
-    //     .then((json) => json);
+  // Common function to handle fetch errors
+  const handleFetchError = (error, errorType) => {
+    console.error(`Error in ${errorType}:`, error);
+    setError(prevError => ({ ...prevError, [errorType]: error.message || 'Error fetching data' }));
+  };
 
-    //   console.log(data);
-    //   setTotalPages(data.length);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
+  const fetchWithRetry = async (url, options, retries = 1) => {
     try {
-      const data = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
-      ).then(async (res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        let errorResponse = await res.json();
-        // here we might get the error so it is best to handle it and throw the error
-        // console.log(errorResponse);
-        setError({ ...error, data: errorResponse.error });
-        throw new Error(errorResponse.error);
-      }).then((json) => json);
-
-      // console.log(data);
-      setCryptoData(data);
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.error || 'API Error');
+      }
+      return await response.json();
     } catch (error) {
-      console.log(error);
+      if (retries > 0 && error.message === 'Failed to fetch') {
+        console.log(`Retrying fetch for ${url}. Attempts left: ${retries - 1}`);
+        return await fetchWithRetry(url, options, retries - 1);
+      } else {
+        throw error;
+      }
     }
   };
 
-  // coindata for the coin portal 
+  const getCryptoData = async () => {
+    setError(prevError => ({ ...prevError, data: "" }));
+    // setError({ ...error, data: "" });
+    setCryptoData();
+    setTotalPages(13220);
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`;
+    try {
+      const data = await fetchWithRetry(url, {});
+      setCryptoData(data);
+    } catch (error) {
+      handleFetchError(error, 'data');
+    }
+  };
 
   const getCoinData = async (coinid) => {
     setCoinData();
@@ -77,12 +68,13 @@ export const CryptoProvider = ({ children }) => {
       )
         .then((res) => res.json())
         .then((json) => json);
-        
+
+      // console.log("CoinData", data);
       setCoinData(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }; 
 
   const getSearchResult = async (query) => {
     try {
@@ -104,14 +96,10 @@ export const CryptoProvider = ({ children }) => {
     setCoinSearch("");
   };
 
-
-// perpage need to call the get crypto data function
   useLayoutEffect(() => {
     getCryptoData();
   }, [coinSearch, currency, sortBy, page, perPage]);
 
-
-  // value pop is the object that we will pass to the provider
   return (
     <CryptoContext.Provider
       value={{

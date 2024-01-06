@@ -18,7 +18,7 @@ function CustomTooltip({ payload, label, active, currency = "usd" }) {
     return (
       <div className="custom-tooltip">
         <p className="label text-sm text-cyan">{`${label} : ${new Intl.NumberFormat(
-          "en-IN",
+          "en-US",
           {
             style: "currency",
             currency: currency,

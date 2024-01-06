@@ -1,20 +1,16 @@
-import React from 'react'
-import paginationArrow from '../assets/pagination-arrow.svg'
-import { useContext } from 'react'
-import { useRef } from 'react'
-import { CryptoContext } from '../context/CryptoContext'
-import submitIcon from '../assets/submit-icon.svg'
+import React, { useContext, useRef } from "react";
+import paginationArrow from "../assets/pagination-arrow.svg";
+import { CryptoContext } from "./../context/CryptoContext";
+import submitIcon from "../assets/submit-icon.svg";
 
-// no. of item per pages , 10, 20, 50, 100, 250
-const PerPage =() =>{
-  const {setPerPage} = useContext(CryptoContext);
+const PerPage = () => {
+  const { setPerPage } = useContext(CryptoContext);
   const inputRef = useRef(null);
 
-// val not equal to zero, setPerPage to val that was input
   const handleSubmit = (e) => {
     e.preventDefault();
     let val = inputRef.current.value;
-    if (val !==0){
+    if (val !== 0) {
       setPerPage(val);
       inputRef.current.value = val;
     }
@@ -39,7 +35,7 @@ const PerPage =() =>{
         type="number"
         name="perpage"
         min={1}
-        max={30}
+        max={250}
         ref={inputRef}
         placeholder="10"
         className="w-16 rounded bg-gray-200 placeholder:text-gray-100
@@ -55,43 +51,42 @@ const PerPage =() =>{
 };
 
 const Pagination = () => {
+  let { page, setPage, totalPages, perPage, cryptoData } =
+    useContext(CryptoContext);
 
-  let {page, setPage, totalPages, perPage, cryptoData} = useContext(CryptoContext);
-  const TotalNumber = Math.ceil(totalPages/perPage);
-
+  const TotalNumber = Math.ceil(totalPages / perPage);
 
   const next = () => {
     if (page === TotalNumber) {
       return null;
-    }else{
+    } else {
       setPage(page + 1);
     }
   };
+
   const prev = () => {
     if (page === 1) {
       return null;
-    }else{
+    } else {
       setPage(page - 1);
     }
   };
 
   const multiStepNext = () => {
-    if (page +3 >= TotalNumber) {
-      setPage(TotalNumber -1);
-    } else{
+    if (page + 3 >= TotalNumber) {
+      setPage(TotalNumber - 1);
+    } else {
       setPage(page + 3);
     }
   };
 
   const multiStepPrev = () => {
-    if (page-3 <= 1) {
-      setPage(TotalNumber+1);
-    }else{
+    if (page - 3 <= 1) {
+      setPage(TotalNumber + 1);
+    } else {
       setPage(page - 2);
     }
   };
-
-  //if the cyptoData is not null and the length is greater than or equal to perPage, display the pagination
 
   if (cryptoData && cryptoData.length >= perPage) {
     return (
@@ -108,8 +103,6 @@ const Pagination = () => {
             </button>
           </li>
 
-          {/* page+1 is not equal to TotalNumber, display this , else return null */}
-
           {page + 1 === TotalNumber || page === TotalNumber ? (
             <li>
               {" "}
@@ -122,8 +115,6 @@ const Pagination = () => {
             </li>
           ) : null}
 
-          {/* page-1 is not equal to zero, display this , else return null */}
-
           {page - 1 !== 0 ? (
             <li>
               <button
@@ -135,7 +126,6 @@ const Pagination = () => {
               </button>
             </li>
           ) : null}
-
           <li>
             <button
               disabled
@@ -178,7 +168,6 @@ const Pagination = () => {
               </button>
             </li>
           ) : null}
-
           <li>
             <button className="outline-0 hover:text-cyan w-8" onClick={next}>
               <img
@@ -194,7 +183,6 @@ const Pagination = () => {
   } else {
     return null;
   }
-
 };
 
-export default Pagination
+export default Pagination;
